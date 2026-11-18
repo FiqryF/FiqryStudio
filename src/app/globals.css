@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+  --studio-background: #090b0f;
+  --studio-surface: #141920;
+  --studio-elevated: #202833;
+  --studio-text: #f3f7fa;
+  --studio-muted: #9ba8b5;
+  --studio-accent: #87ceeb;
+  --studio-highlight: #b7e5f7;
+  --studio-border: #35414f;
+  --studio-focus: var(--studio-highlight);
+  --studio-radius: 0.75rem;
+  --studio-gutter: clamp(1.5rem, 5vw, 4rem);
+  --studio-content: 76rem;
+  --studio-glass: rgb(20 25 32 / 85%);
+  --studio-glass-blur: 0.75rem;
+}
+
+@theme inline {
+  --color-background: var(--studio-background);
+  --color-surface: var(--studio-surface);
+  --color-elevated: var(--studio-elevated);
+  --color-foreground: var(--studio-text);
+  --color-muted: var(--studio-muted);
+  --color-accent: var(--studio-accent);
+  --color-highlight: var(--studio-highlight);
+  --color-border: var(--studio-border);
+  --color-focus: var(--studio-focus);
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --radius-panel: var(--studio-radius);
+  --spacing-gutter: var(--studio-gutter);
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    min-block-size: 100svh;
+    background: var(--studio-background);
+    color: var(--studio-text);
+    font-family: var(--font-sans);
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--studio-focus);
+    outline-offset: 4px;
+  }
+
+  ::selection {
+    color: var(--studio-background);
+    background: var(--studio-highlight);
+  }
+}
+
+.public-shell {
+  /* A future fixed mobile navigation can set --public-bottom-nav-space. */
+  display: grid;
+  min-block-size: 100svh;
+  padding-block-start: max(var(--studio-gutter), env(safe-area-inset-top));
+  padding-block-end: calc(
+    max(var(--studio-gutter), env(safe-area-inset-bottom)) +
+      var(--public-bottom-nav-space, 0px)
+  );
+  padding-left: max(var(--studio-gutter), env(safe-area-inset-left));
+  padding-right: max(var(--studio-gutter), env(safe-area-inset-right));
+}
+
+.public-content {
+  display: grid;
+  align-content: center;
+  inline-size: 100%;
+  max-inline-size: var(--studio-content);
+  min-inline-size: 0;
+  margin-inline: auto;
+}
+
+.skip-link {
+  position: absolute;
+  z-index: 1;
+  inset-block-start: calc(env(safe-area-inset-top, 0px) + 0.75rem);
+  inset-inline-start: max(
+    var(--studio-gutter),
+    calc(env(safe-area-inset-left, 0px) + 0.5rem)
+  );
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.75rem;
+  padding-inline: 1rem;
+  border-radius: var(--studio-radius);
+  background: var(--studio-highlight);
+  color: var(--studio-background);
+}
+
+.skip-link:not(:focus) {
+  clip-path: inset(50%);
+}
+
+.studio-intro {
+  display: grid;
+  gap: clamp(2rem, 6vw, 5rem);
+}
+
+.studio-wordmark {
+  color: var(--studio-text);
+  font-size: 0.9375rem;
+  letter-spacing: -0.045em;
+}
+
+.studio-message {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.studio-title {
+  font-size: clamp(3.125rem, 12vw, 8.75rem);
+  font-weight: 650;
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+}
+
+.studio-title span {
+  display: block;
+}
+
+.studio-description {
+  max-inline-size: 34ch;
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+}
+
+.studio-status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-block-start: 1.25rem;
+  border-block-start: 1px solid var(--studio-border);
+  font-size: 0.8125rem;
+}
+
+.status-light {
+  flex: 0 0 auto;
+  inline-size: 0.5rem;
+  block-size: 0.5rem;
+  border-radius: 50%;
+  background: var(--studio-accent);
+}
+
+@media (width >= theme(--breakpoint-lg)) {
+  .studio-title {
+    font-size: clamp(4.875rem, 8.9vw, 8rem);
+  }
+
+  .studio-title span {
+    display: inline-block;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
