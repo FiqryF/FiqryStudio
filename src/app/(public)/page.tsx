@@ -18,7 +18,7 @@ export default function HomePage() {
 
       <p className="studio-status font-mono text-muted">
         <span className="status-light" aria-hidden="true" />
-        Website under development
+        <span>Website under development</span>
       </p>
     </section>
   );

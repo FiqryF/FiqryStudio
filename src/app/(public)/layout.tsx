@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 
-export default function PublicLayout({ children }: { children: ReactNode }) {
+export default function PublicLayout({
+  children,
+}: Readonly<{ children: ReactNode }>) {
   return (
     <div className="public-shell">
       <a className="skip-link" href="#main-content">
